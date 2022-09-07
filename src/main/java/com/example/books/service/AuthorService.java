@@ -8,5 +8,4 @@ public interface AuthorService {
     Author createAuthor(Author author);
     Author getAuthorById(long authorId);
     List<Author> getAuthors();
-    void deleteAuthor(long id);
 }

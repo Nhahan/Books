@@ -39,15 +39,4 @@ public class AuthorServiceImpl implements AuthorService{
     public List<Author> getAuthors() {
         return this.authorRepository.findAll();
     }
-
-    @Override
-    public void deleteAuthor(long authorId) {
-        Optional<Author> optionalAuthor = this.authorRepository.findById(authorId);
-
-        if (optionalAuthor.isPresent()) {
-            this.authorRepository.delete(optionalAuthor.get());
-        } else {
-            throw new ResourceNotFoundException("Author not found with id: " + authorId);
-        }
-    }
 }
