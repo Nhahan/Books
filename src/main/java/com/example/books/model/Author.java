@@ -1,22 +1,25 @@
 package com.example.books.model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "authors")
+@Table
 @Getter
+@NoArgsConstructor
 public class Author {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column @NotNull
+    @Column @NotBlank
     private String name;
-    @Column @NotNull
-    private Date birth;
+    @Column
+    private LocalDate birth;
     @CreationTimestamp
     private Date createAt;
     @CreationTimestamp

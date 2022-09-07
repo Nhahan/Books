@@ -3,7 +3,6 @@ package com.example.books.service;
 import com.example.books.exception.ResourceNotFoundException;
 import com.example.books.model.Author;
 import com.example.books.repository.AuthorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
