@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -20,11 +17,11 @@ import java.util.List;
 public class Book {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column @Size(min=1, max=255)
+    @Column @NotBlank @Size(min=1, max=255)
     private String title;
     @Column @NotBlank
     private Boolean discontinued;
-    @Column @Pattern(regexp = "^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$")
+    @Column @NotBlank @Pattern(regexp = "^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$")
     private String isbn;
     @Column @NotBlank
     private int pages;
@@ -32,9 +29,8 @@ public class Book {
     private LocalDate yearOfPublication;
     @Column @Digits(integer = 12, fraction = 2)
     private Double price;
-    @OneToMany
-    @JoinColumn(name = "AUTHOR_ID")
-    private List<Author> authors;
+    @OneToMany @NotBlank @JoinColumn(name = "AUTHOR_ID")
+    private List<Author> authors = new java.util.ArrayList<>();
     @CreationTimestamp
     private Date createAt;
     @CreationTimestamp
