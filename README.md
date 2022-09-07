@@ -7,3 +7,4 @@
 5. dto없이 하려고 했지만 Date 변환 문제 때문에 AuthorRequestDto 추가
 6. Validation 문제로 Date를 LocalDate 타입으로 변경 (레퍼런스: https://stackoverflow.com/questions/14194290/validating-a-date-in-java)
 7. 6-7과정에서 LocalDate는 yyyy-MM-dd 형태의 String을 받을 수 있어 dto가 필요없어졌으므로 AuthorRequestDto 삭제
+8. isbn regex pattern validation (레퍼런스: https://howtodoinjava.com/java/regex/java-regex-validate-international-standard-book-number-isbns/)
