@@ -1,6 +1,5 @@
 package com.example.books.service;
 
-import com.example.books.exception.ResourceNotFoundException;
 import com.example.books.model.Author;
 import com.example.books.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,7 @@ public class AuthorServiceImpl implements AuthorService{
         if (optionalAuthor.isPresent()) {
             return optionalAuthor.get();
         } else {
-            throw new ResourceNotFoundException("Author not found with id: " + authorId);
+            throw new NullPointerException("Author not found with id: " + authorId);
         }
     }
 
@@ -39,7 +38,7 @@ public class AuthorServiceImpl implements AuthorService{
     public List<Author> getAuthors() {
         List<Author> authors = this.authorRepository.findAll();
         if (authors.isEmpty()) {
-            throw new ResourceNotFoundException("Authors not found");
+            throw new NullPointerException("Authors not found");
         }
         return authors;
     }

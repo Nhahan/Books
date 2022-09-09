@@ -15,11 +15,14 @@ import java.util.Date;
 @NoArgsConstructor
 public class Author {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     @Column @NotBlank
     private String name;
     @Column
     private LocalDate birth;
+    @ManyToOne
+    @JoinColumn(name = "book_id", insertable = false, updatable = false)
+    private Book book;
     @CreationTimestamp
     private Date createAt;
     @CreationTimestamp

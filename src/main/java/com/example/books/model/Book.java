@@ -17,10 +17,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Book {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     @Column @NotBlank @Size(min=1, max=255)
     private String title;
-    @Column
+    @Column @NotNull
     private Boolean discontinued;
     @Column @NotBlank @Pattern(regexp = "^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$")
     private String isbn;
@@ -32,7 +32,7 @@ public class Book {
     private Double price;
     @Column
     private Currency currency;
-    @OneToMany @JoinColumn(name = "AUTHOR_ID")
+    @OneToMany(mappedBy = "book")
     private List<Author> authors = new java.util.ArrayList<>();
     @CreationTimestamp
     private Date createAt;
@@ -44,7 +44,7 @@ public class Book {
         this.discontinued = false;
     }
 
-    @AssertTrue
+    @AssertTrue(message = "If price exist, so should the currency. If not, there should be no currency.")
     private boolean isCurrencyValid() {
         if (price != null && currency == null) {
             throw new NullPointerException("If price exists, then currency must exist.");
