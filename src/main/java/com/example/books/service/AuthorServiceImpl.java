@@ -37,6 +37,10 @@ public class AuthorServiceImpl implements AuthorService{
 
     @Override
     public List<Author> getAuthors() {
-        return this.authorRepository.findAll();
+        List<Author> authors = this.authorRepository.findAll();
+        if (authors.isEmpty()) {
+            throw new ResourceNotFoundException("Authors not found");
+        }
+        return authors;
     }
 }

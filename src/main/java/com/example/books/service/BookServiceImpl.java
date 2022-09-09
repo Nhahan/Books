@@ -1,5 +1,6 @@
 package com.example.books.service;
 
+import com.example.books.exception.ResourceNotFoundException;
 import com.example.books.model.Book;
 import com.example.books.repository.BookRepository;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,10 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public List<Book> getBooks() {
-        return this.bookRepository.findAll();
+        List<Book> books = this.bookRepository.findAll();
+        if (books.isEmpty()) {
+            throw new ResourceNotFoundException("Books not found");
+        }
+        return books;
     }
 }
