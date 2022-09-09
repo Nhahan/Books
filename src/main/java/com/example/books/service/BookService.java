@@ -1,10 +1,9 @@
 package com.example.books.service;
 
 import com.example.books.model.Book;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface BookService {
     Book createBook(Book book);
-    List<Book> getBooks();
+    Page<Book> getBooks(int page, int size);
 }

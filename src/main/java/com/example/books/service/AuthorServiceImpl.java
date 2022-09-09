@@ -2,6 +2,7 @@ package com.example.books.service;
 
 import com.example.books.model.Author;
 import com.example.books.repository.AuthorRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -10,13 +11,10 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class AuthorServiceImpl implements AuthorService{
 
     private final AuthorRepository authorRepository;
-
-    public AuthorServiceImpl(AuthorRepository authorRepository) {
-        this.authorRepository = authorRepository;
-    }
 
     @Override
     public Author createAuthor(Author author) {
