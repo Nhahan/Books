@@ -14,4 +14,12 @@ public class BookRequestDto {
     private int pages;
     private LocalDate yearOfPublication;
     private List<Long> authorIds;
+
+    public BookRequestDto(String title, String isbn, int pages, LocalDate yearOfPublication, List<Long> authorIds) {
+        this.title = title;
+        this.isbn = isbn;
+        this.pages = pages;
+        this.yearOfPublication = yearOfPublication;
+        this.authorIds = authorIds;
+    }
 }
