@@ -42,7 +42,7 @@ public class BookServiceImpl implements BookService{
     public List<BookResponseDto> getBooks(int page, int size) {
         List<Book> books = this.bookRepository.findAllBy(PageRequest.of(page - 1, size));
         if (books.isEmpty()) {
-            throw new NoSuchElementException("Books not found");
+            return new ArrayList<>();
         }
         return books.stream()
                 .map(this::toBookResponseDto)
