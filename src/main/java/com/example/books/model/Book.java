@@ -2,7 +2,6 @@ package com.example.books.model;
 
 import com.example.books.constant.Currency;
 import com.example.books.dto.BookRequestDto;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,25 +15,24 @@ import java.util.Date;
 @Table
 @Getter
 @NoArgsConstructor
-@Schema(description = "Book")
 public class Book {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "book_id")
     private Long id;
-    @Column @NotBlank @Size(min=1, max=255) @Schema(description = "title")
+    @Column @NotBlank @Size(min=1, max=255)
     private String title;
-    @Column @NotNull @Schema(description = "title", nullable = true, defaultValue = "false")
+    @Column @NotNull
     private Boolean discontinued;
     @Pattern(regexp = "^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$")
-    @Column @NotBlank @Schema(description = "isbn")
+    @Column @NotBlank
     private String isbn;
-    @Column @NotNull @Schema(description = "pages")
+    @Column @NotNull
     private int pages;
-    @Column @Schema(description = "yearOfPublication")
+    @Column
     private LocalDate yearOfPublication;
-    @Column @Digits(integer = 12, fraction = 2) @Schema(description = "price", nullable = true)
+    @Column @Digits(integer = 12, fraction = 2)
     private Double price;
-    @Column @Schema(description = "currency (only nullable when price is null", nullable = true)
+    @Column
     private Currency currency;
     @CreationTimestamp
     private Date createAt;

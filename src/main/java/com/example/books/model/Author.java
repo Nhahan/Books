@@ -14,18 +14,17 @@ import java.util.Date;
 @Table
 @Getter
 @NoArgsConstructor
-@Schema(description = "Author")
 public class Author {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "author_id")
+    @Column(name = "author_id") @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
-    @Column @NotBlank @Schema(description = "name", nullable = false)
+    @Column @NotBlank
     private String name;
-    @Column @Schema(description = "birth", nullable = false)
+    @Column
     private LocalDate birth;
-    @CreationTimestamp
+    @CreationTimestamp @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Date createAt;
-    @CreationTimestamp
+    @CreationTimestamp @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Date updatedAt;
 
     public Author(String name, LocalDate birth) {

@@ -10,6 +10,7 @@ import com.example.books.repository.AuthorRepository;
 import com.example.books.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -39,8 +40,8 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public List<BookResponseDto> getBooks(int page, int size) {
-        List<Book> books = this.bookRepository.findAllBy(PageRequest.of(page - 1, size));
+    public List<BookResponseDto> getBooks(Pageable pageable) {
+        List<Book> books = this.bookRepository.findAllBy(pageable);
         if (books.isEmpty()) {
             return new ArrayList<>();
         }
