@@ -5,13 +5,11 @@ import com.example.books.model.Author;
 import com.example.books.model.Book;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@ToString
 @Getter
 @NoArgsConstructor
 public class BookResponseDto {
