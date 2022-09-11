@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: books-app
 
 on:
   push:
@@ -45,8 +45,8 @@ jobs:
       with:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: books-app
-        environment_name: books-env
+        application_name: Books3
+        environment_name: Books3-env
         version_label: books-${{steps.current-time.outputs.formattedTime}}-${{github.sha}}
         region: ${{ secrets.AWS_REGION }}
         deployment_package: deploy/deploy.zip
