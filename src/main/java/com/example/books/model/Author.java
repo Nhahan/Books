@@ -1,5 +1,6 @@
 package com.example.books.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,13 +14,14 @@ import java.util.Date;
 @Table
 @Getter
 @NoArgsConstructor
+@Schema(description = "Author")
 public class Author {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "author_id")
     private Long id;
-    @Column @NotBlank
+    @Column @NotBlank @Schema(description = "name", nullable = false)
     private String name;
-    @Column
+    @Column @Schema(description = "birth", nullable = false)
     private LocalDate birth;
     @CreationTimestamp
     private Date createAt;

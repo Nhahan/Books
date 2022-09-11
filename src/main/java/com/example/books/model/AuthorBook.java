@@ -2,16 +2,12 @@ package com.example.books.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity
 @Table
 @Getter
-@Setter
-@ToString
 @NoArgsConstructor
 public class AuthorBook {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)

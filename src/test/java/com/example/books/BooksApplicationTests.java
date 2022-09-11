@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.books.constant.Currency.KRW;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -43,10 +44,13 @@ class BooksApplicationTests {
 
         BookRequestDto bookRequestDto = new BookRequestDto(
                 "title",
+                false,
                 "ISBN 978-0-596-52068-7",
                 3,
                 LocalDate.of(2020, 1, 8),
-                new ArrayList<Long>(List.of(1L)));
+                10.21,
+                KRW,
+                new ArrayList<>(List.of(1L)));
         Book book = bookRepository.save(new Book(bookRequestDto));
 
         assertThat(authorBookRepository.findById(author.getId())).isNotNull();
