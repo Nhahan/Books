@@ -22,6 +22,12 @@ public class AuthorServiceImpl implements AuthorService{
 
     @Override
     public Author getAuthorById(long authorId) {
-        return this.authorRepository.findById(authorId).orElseThrow(() -> new NullPointerException("Author not found, id: " + authorId));
+        Optional<Author> optionalAuthor = this.authorRepository.findById(authorId);
+
+        if (optionalAuthor.isPresent()) {
+            return optionalAuthor.get();
+        } else {
+            throw new NullPointerException("Author not found with id: " + authorId);
+        }
     }
 }
