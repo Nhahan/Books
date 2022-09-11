@@ -32,3 +32,26 @@ jobs:
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: build
+    - name: Generate deployment package
+        run:|
+          mkdir -p deploy
+          cp books/build/libs/books-0.0.1-SNAPSHOT.jar deploy/books.jar
+          cp Procfile deploy/Procfile
+          cp -r .ebextensions deploy/.ebextensions
+          cd deploy && zip -r books-${{steps.current-time.outputs.formattedTime}}-${{github.sha}} .
+    - name: Get current time
+      uses: 1466587594/get-current-time@v2
+      id: current-time
+      with:
+        format: YYYYMMDDTHHmm
+        utcOffset: "+09:00"
+    - name: Deploy Consumer to EB
+      uses: einaregilsson/beanstalk-deploy@v14
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: books-app
+        environment_name: books-env
+        version_label: books-${{steps.current-time.outputs.formattedTime}}-${{github.sha}}
+        region: ${{ secrets.AWS_REGION }}
+        deployment_package: deploy/books-${{steps.current-time.outputs.formattedTime}}-${{github.sha}}.zip
