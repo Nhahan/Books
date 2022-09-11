@@ -16,11 +16,6 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @GetMapping("/authors")
-    public ResponseEntity<List<Author>> getAuthors() {
-        return ResponseEntity.ok().body(this.authorService.getAuthors());
-    }
-
     @GetMapping("/authors/{id}")
     public ResponseEntity<Author> getAuthorById(@PathVariable long id) {
         return ResponseEntity.ok().body(this.authorService.getAuthorById(id));

@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,11 +29,5 @@ public class AuthorServiceImpl implements AuthorService{
         } else {
             throw new NullPointerException("Author not found with id: " + authorId);
         }
-    }
-
-    // 삭제 예정. 테스트용.
-    @Override
-    public List<Author> getAuthors() {
-        return this.authorRepository.findAll();
     }
 }

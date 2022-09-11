@@ -25,4 +25,9 @@ public class Author {
     private Date createAt;
     @CreationTimestamp
     private Date updatedAt;
+
+    public Author(String name, LocalDate birth) {
+        this.name = name;
+        this.birth = birth;
+    }
 }
