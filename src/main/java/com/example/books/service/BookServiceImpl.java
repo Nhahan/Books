@@ -1,32 +1,57 @@
 package com.example.books.service;
 
+import com.example.books.dto.BookRequestDto;
+import com.example.books.dto.BookResponseDto;
+import com.example.books.model.Author;
+import com.example.books.model.AuthorBook;
 import com.example.books.model.Book;
+import com.example.books.repository.AuthorBookRepository;
+import com.example.books.repository.AuthorRepository;
 import com.example.books.repository.BookRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService{
 
     private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
+    private final AuthorBookRepository authorBookRepository;
 
     @Override
-    public Book createBook(Book book) {
-        return bookRepository.save(book);
+    public BookResponseDto createBook(BookRequestDto bookRequestDto) {
+        Book savedBook = bookRepository.save(new Book(bookRequestDto));
+
+        List<Author> authors = bookRequestDto.getAuthorIds().stream()
+                .map(authorId -> authorRepository.findById(authorId).orElseThrow(NoSuchElementException::new))
+                .collect(Collectors.toList());
+
+        authors.forEach(author -> authorBookRepository.save(new AuthorBook(author, savedBook)));
+
+        return new BookResponseDto(savedBook, authors);
     }
 
     @Override
-    public Page<Book> getBooks(int page, int size) {
-        Page<Book> books = this.bookRepository.findAll(PageRequest.of(page - 1, size));
+    public List<BookResponseDto> getBooks(int page, int size) {
+        List<Book> books = this.bookRepository.findAllBy(PageRequest.of(page - 1, size));
         if (books.isEmpty()) {
-            throw new NullPointerException("Books not found");
+            throw new NoSuchElementException("Books not found");
         }
-        return books;
+        return books.stream()
+                .map(this::toBookResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    private BookResponseDto toBookResponseDto(Book book) {
+        return new BookResponseDto(book, authorBookRepository.findAllByBookId(book.getId()).stream()
+                .map(AuthorBook::getAuthor)
+                .collect(Collectors.toList()));
     }
 }

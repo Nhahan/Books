@@ -1,11 +1,12 @@
 package com.example.books.controller;
 
-import com.example.books.model.Book;
+import com.example.books.dto.BookRequestDto;
+import com.example.books.dto.BookResponseDto;
 import com.example.books.service.BookService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class BookController {
@@ -17,12 +18,12 @@ public class BookController {
     }
 
     @GetMapping("/books")
-    public ResponseEntity<Page<Book>> getBooks(@RequestParam int page, @RequestParam(required = false , defaultValue = "10") int size) {
+    public ResponseEntity<List<BookResponseDto>> getBooks(@RequestParam int page, @RequestParam(required = false , defaultValue = "10") int size) {
         return ResponseEntity.ok().body(this.bookService.getBooks(page, size));
     }
 
     @PostMapping("/books")
-    public ResponseEntity<Book> createBook(@RequestBody Book book) {
-        return ResponseEntity.ok().body(this.bookService.createBook(book));
+    public ResponseEntity<BookResponseDto> createBook(@RequestBody BookRequestDto bookRequestDto) {
+        return ResponseEntity.ok().body(this.bookService.createBook(bookRequestDto));
     }
 }

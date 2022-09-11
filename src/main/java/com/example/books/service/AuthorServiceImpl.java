@@ -2,7 +2,7 @@ package com.example.books.service;
 
 import com.example.books.model.Author;
 import com.example.books.repository.AuthorRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService{
 
     private final AuthorRepository authorRepository;
@@ -32,12 +32,9 @@ public class AuthorServiceImpl implements AuthorService{
         }
     }
 
+    // 삭제 예정. 테스트용.
     @Override
     public List<Author> getAuthors() {
-        List<Author> authors = this.authorRepository.findAll();
-        if (authors.isEmpty()) {
-            throw new NullPointerException("Authors not found");
-        }
-        return authors;
+        return this.authorRepository.findAll();
     }
 }

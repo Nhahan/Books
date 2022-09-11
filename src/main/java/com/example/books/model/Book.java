@@ -1,6 +1,7 @@
 package com.example.books.model;
 
 import com.example.books.constant.Currency;
+import com.example.books.dto.BookRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
+import java.util.Date;
 
 @Entity
 @Table
@@ -17,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Book {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "book_id")
     private Long id;
     @Column @NotBlank @Size(min=1, max=255)
     private String title;
@@ -32,12 +34,17 @@ public class Book {
     private Double price;
     @Column
     private Currency currency;
-    @OneToMany(mappedBy = "book")
-    private List<Author> authors = new java.util.ArrayList<>();
     @CreationTimestamp
     private Date createAt;
     @CreationTimestamp
     private Date updatedAt;
+
+    public Book(BookRequestDto bookRequestDto) {
+        this.title = bookRequestDto.getTitle();
+        this.isbn = bookRequestDto.getIsbn();
+        this.pages = bookRequestDto.getPages();
+        this.yearOfPublication = bookRequestDto.getYearOfPublication();
+    }
 
     @PrePersist
     public void prePersist() {
