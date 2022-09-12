@@ -21,7 +21,7 @@ http://books3.ap-northeast-2.elasticbeanstalk.com/swagger-ui/#/
 - dto를 최대한 없이 하려다가 Book은 필요해서 넣었고, Author는 없어도 됐지만 Swagger에 깔끔하게 나오는게 좋아서 결국 dto를 다 넣었다.
 - 이 프로젝트의 최대 고민은 Book과 Author의 다대다 관계 설정이었다. 간단하게 할건데 양방향으로 할 시 FK관리와 create할 때 힘드니까 AuthorBook 중간테이블에서만 @ManyToOne으로 하기로 했다. 따라서 Book의 입장에서는 AuthorBook의 존재를 모르니 BookService getBooks()에서 쿼리를 두 번 했다.
 - 따로 누군가에게 질문할 필요 없이 Swagger만 봐도 모든 API를 직관적으로 알 수 있게 description을 작성해보았다.
-- Paging은 스프링에서 Page/Slice/List로 할 수 있는데 개인적으로 count쿼리가 나가지 않느 Slice로 하는게 가장 맞다고 생각하지만, 따로 주문사항이 없었고 Book타입을 조작해서 BookResponseDto를 만들어줘야했기 때문에 구현하기 쉬운 List로 했다.
+- Paging은 스프링에서 Page/Slice/List로 할 수 있는데 개인적으로 count쿼리가 나가지 않 Slice로 하는게 가장 맞다고 생각하지만, 따로 주문사항이 없었고 Book타입을 조작해서 BookResponseDto를 만들어줘야했기 때문에 구현하기 쉬운 List로 했다.
 - 로직 자체가 create와 read밖에 없기 때문에 테스트코드는 실제 DB에 create와 read가 되는지 정도의 코드만 작성했다.
 <br>
 
