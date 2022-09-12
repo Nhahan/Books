@@ -4,6 +4,7 @@ import com.example.books.dto.AuthorRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -24,7 +25,7 @@ public class Author {
     private LocalDate birth;
     @CreationTimestamp
     private Date createAt;
-    @CreationTimestamp
+    @UpdateTimestamp
     private Date updatedAt;
 
     public Author(AuthorRequestDto authorRequestDto) {

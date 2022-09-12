@@ -5,6 +5,7 @@ import com.example.books.dto.BookRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -36,7 +37,7 @@ public class Book {
     private Currency currency;
     @CreationTimestamp
     private Date createAt;
-    @CreationTimestamp
+    @UpdateTimestamp
     private Date updatedAt;
 
     public Book(BookRequestDto bookRequestDto) {
