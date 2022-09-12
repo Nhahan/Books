@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -19,7 +20,7 @@ public class Author {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "author_id")
     private Long id;
-    @Column @NotBlank
+    @Column @NotBlank @Size(min=1, max=255)
     private String name;
     @Column
     private LocalDate birth;
