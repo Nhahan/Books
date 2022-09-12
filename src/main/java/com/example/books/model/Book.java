@@ -22,7 +22,7 @@ public class Book {
     private Long id;
     @Column @NotBlank @Size(min=1, max=255)
     private String title;
-    @Column @NotNull
+    @Column
     private Boolean discontinued;
     @Pattern(regexp = "^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$")
     @Column @NotBlank
@@ -48,6 +48,13 @@ public class Book {
         this.yearOfPublication = bookRequestDto.getYearOfPublication();
         this.price = bookRequestDto.getPrice();
         this.currency = bookRequestDto.getCurrency();
+    }
+
+    @PrePersist
+    private void prePersist() {
+        if (this.discontinued == null) {
+            this.discontinued = false;
+        }
     }
 
     @AssertTrue(message = "If price exist, so should the currency. If not, there should be no currency.")
