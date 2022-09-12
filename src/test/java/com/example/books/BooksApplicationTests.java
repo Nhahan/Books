@@ -40,7 +40,7 @@ class BooksApplicationTests {
     }
 
     @Test
-    void create() {
+    void createAndRead() {
         AuthorRequestDto authorRequestDto = new AuthorRequestDto("test", LocalDate.of(2020, 1, 8));
         Author author = authorRepository.save(new Author(authorRequestDto));
 
