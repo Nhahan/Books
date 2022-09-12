@@ -27,11 +27,11 @@ public class Book {
     @Pattern(regexp = "^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$")
     @Column @NotBlank
     private String isbn;
-    @Column @NotNull
+    @Column @NotNull @Positive
     private int pages;
     @Column
     private LocalDate yearOfPublication;
-    @Column @Digits(integer = 12, fraction = 2)
+    @Column @Positive @Digits(integer = 12, fraction = 2)
     private Double price;
     @Column
     private Currency currency;
