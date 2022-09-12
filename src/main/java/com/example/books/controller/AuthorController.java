@@ -1,6 +1,7 @@
 package com.example.books.controller;
 
-import com.example.books.model.Author;
+import com.example.books.dto.AuthorRequestDto;
+import com.example.books.dto.AuthorResponseDto;
 import com.example.books.service.AuthorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +16,12 @@ public class AuthorController {
     }
 
     @GetMapping("/authors/{id}")
-    public ResponseEntity<Author> getAuthorById(@PathVariable long id) {
+    public ResponseEntity<AuthorResponseDto> getAuthorById(@PathVariable long id) {
         return ResponseEntity.ok().body(this.authorService.getAuthorById(id));
     }
 
     @PostMapping("/authors")
-    public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
-        return ResponseEntity.ok().body(this.authorService.createAuthor(author));
+    public ResponseEntity<Long> createAuthor(@RequestBody AuthorRequestDto authorRequestDto) {
+        return ResponseEntity.ok().body(this.authorService.createAuthor(authorRequestDto));
     }
 }

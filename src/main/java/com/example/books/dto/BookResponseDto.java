@@ -1,9 +1,7 @@
 package com.example.books.dto;
 
 import com.example.books.constant.Currency;
-import com.example.books.model.Author;
 import com.example.books.model.Book;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +12,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class BookResponseDto {
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
     private String title;
     private Boolean discontinued;
@@ -23,13 +20,11 @@ public class BookResponseDto {
     private LocalDate yearOfPublication;
     private Double price;
     private Currency currency;
-    private List<Author> authors;
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+    private List<AuthorResponseDto> authors;
     private Date createAt;
-    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Date updatedAt;
 
-    public BookResponseDto(Book book, List<Author> authors) {
+    public BookResponseDto(Book book, List<AuthorResponseDto> authors) {
         this.id = book.getId();
         this.title = book.getTitle();
         this.discontinued = book.getDiscontinued();

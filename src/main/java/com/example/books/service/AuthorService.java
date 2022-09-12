@@ -1,8 +1,9 @@
 package com.example.books.service;
 
-import com.example.books.model.Author;
+import com.example.books.dto.AuthorRequestDto;
+import com.example.books.dto.AuthorResponseDto;
 
 public interface AuthorService {
-    Author createAuthor(Author author);
-    Author getAuthorById(long authorId);
+    Long createAuthor(AuthorRequestDto authorRequestDto);
+    AuthorResponseDto getAuthorById(long authorId);
 }
