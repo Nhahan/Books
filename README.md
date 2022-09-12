@@ -3,6 +3,11 @@
 
 ## 1. 아키텍쳐, ci/cd 파이프라인
 <img width="729" alt="image" src="https://user-images.githubusercontent.com/81916648/189662379-75087303-66c4-468b-8da7-5bb44ac9e8d7.png">
+
+- 배포 프로세스 상태 확인하는 법
+<img width="311" alt="image" src="https://user-images.githubusercontent.com/81916648/189677990-2f0b3fde-e015-4842-983f-a49e0a97012a.png">
+✅ Green: 성공 / 🟡 Yello: 진행중 / ❌ Red: 실패 혹은 취소 
+<br>
 <br>
 
 ## 2. 스웨거
