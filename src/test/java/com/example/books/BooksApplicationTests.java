@@ -1,5 +1,6 @@
 package com.example.books;
 
+import com.example.books.dto.AuthorRequestDto;
 import com.example.books.dto.BookRequestDto;
 import com.example.books.model.Author;
 import com.example.books.model.Book;
@@ -40,7 +41,8 @@ class BooksApplicationTests {
 
     @Test
     void create() {
-        Author author = authorRepository.save(new Author("test", LocalDate.of(2020, 1, 8)));
+        AuthorRequestDto authorRequestDto = new AuthorRequestDto("test", LocalDate.of(2020, 1, 8));
+        Author author = authorRepository.save(new Author(authorRequestDto));
 
         BookRequestDto bookRequestDto = new BookRequestDto(
                 "title",
