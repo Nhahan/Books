@@ -30,6 +30,7 @@ http://books3.ap-northeast-2.elasticbeanstalk.com/swagger-ui/#/
 <br>
 
 ## 5. 로컬 빌드 방법
+ 🛠 환경: Java 11, Gradle
 - 최상위 디렉토리인 /Books에서 `./gradlew build && java -jar ./build/libs/books-0.0.1-SNAPSHOT.jar`
 - Port 문제로 안될 시 /src/main/resources/application.properties에서 `server.port=5000` 포트 숫자 변경 후 실행
 <br>
