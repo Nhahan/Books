@@ -45,14 +45,16 @@ public class BookServiceImpl implements BookService{
         if (books.isEmpty()) {
             return new ArrayList<>();
         }
-        return books.stream()
-                .map(this::toBookResponseDto)
-                .collect(Collectors.toList());
-    }
 
-    private BookResponseDto toBookResponseDto(Book book) {
-        return new BookResponseDto(book, authorBookRepository.findAllByBookId(book.getId()).stream()
-                .map(authorBook -> new AuthorResponseDto(authorBook.getAuthor()))
-                .collect(Collectors.toList()));
+        List<Long> bookIds = books.stream().map(Book::getId).collect(Collectors.toList());
+        Map<Long, List<AuthorResponseDto>> authorBooks = authorBookRepository.findAllByBookIds(bookIds).stream()
+                .collect(Collectors.groupingBy(
+                        authorBook -> authorBook.getBook().getId(),
+                        Collectors.mapping(authorBook -> new AuthorResponseDto(authorBook.getAuthor()),
+                                Collectors.toList())));
+
+        return books.stream()
+                .map(book -> new BookResponseDto(book, authorBooks.get(book.getId())))
+                .collect(Collectors.toList());
     }
 }
