@@ -11,7 +11,7 @@
 <br>
 
 ## 2. 스웨거
-http://books3.ap-northeast-2.elasticbeanstalk.com/swagger-ui/#/
+~~http://books3.ap-northeast-2.elasticbeanstalk.com/swagger-ui/#/~~ 서버 닫았습니다.
 
 <img width="490" alt="image" src="https://user-images.githubusercontent.com/81916648/190440624-d17d5c9f-8603-4230-8054-f4a73529494a.png">
 <img width="484" alt="image" src="https://user-images.githubusercontent.com/81916648/190440721-d2ec591e-0be7-4447-8c7b-dc6e15526629.png">
